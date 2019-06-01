@@ -8,8 +8,31 @@ const axios = require('axios')
 
 class Controller {
 
-
     static edit(req, res) {
+        // let validasi = jwt.verify(req.headers.token)
+        // console.log(req.body);
+
+        Model.findOneAndUpdate({
+            _id: req.params.id
+        }, req.body, {
+                new: true
+            })
+            .then(data => {
+                res.status(200).json(data)
+                console.log(data);
+
+            })
+
+            .catch(function (err) {
+                res.status(500).json({
+                    messege: err.message
+                })
+            })
+
+    }
+
+
+    static getedit(req, res) {
 
 
         Model.find({
